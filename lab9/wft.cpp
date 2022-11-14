@@ -63,7 +63,7 @@ int main() {
     cout<<"processes ";
     for(int i=0;i<p;i++) {
         
-        if(allocated_block_index[i]) {
+        if(allocated_block_index[i] != -1) {
             
             cout<<"["<<i+1<<"]"<<" ";
         }
@@ -71,7 +71,7 @@ int main() {
     cout<<"have been allocated to blocks ";
     for(int i=0;i<p;i++) {
 
-        if(allocated_block_index[i]) {
+        if(allocated_block_index[i] != -1) {
 
             cout<<"["<<allocated_block_index[i]+1<<"]"<<" ";
         }
@@ -83,7 +83,7 @@ int main() {
     cout<<"processes ";
     for(int i=0;i<p;i++) {
 
-        if(!allocated_block_index[i]) {
+        if(allocated_block_index[i] == -1) {
             
             cout<<"["<<i+1<<"]"<<" ";
         }

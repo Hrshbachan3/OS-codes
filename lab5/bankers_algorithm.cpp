@@ -3,83 +3,83 @@ using namespace std;
 
 int main() {
 
-    int n;
+    int p;
     cout<<"number of processes: ";
-    cin>>n;
-    int m;
+    cin>>p;
+    int r;
     cout<<"number of resources: ";
-    cin>>m;
+    cin>>r;
 
 
     //forming allocation matrix
-    int allocation[n][m]; //already allocated resources
+    int allocation[p][r]; //already allocated resources
 
-    int* safe_sequence = (int*)malloc(n*sizeof(int));
+    int* safe_sequence = (int*)malloc(p*sizeof(int));
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<p;i++) {
         
         cout<<"provide allocated resources of process "<<i+1<<": ";
         
-        for(int j=0;j<m;j++) {
+        for(int j=0;j<r;j++) {
             
             cin>>allocation[i][j];
         }
     }
 
     //forming max matrix
-    int max[n][m]; //maximum need of resources for process to terminate
+    int max[p][r]; //maximum need of resources for process to terminate
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<p;i++) {
         
         cout<<"provide maximum resources of process "<<i+1<<": ";
         
-        for(int j=0;j<m;j++) {
+        for(int j=0;j<r;j++) {
             
             cin>>max[i][j];
         }
     }
 
     //forming avaliable array
-    int available[m]; //initially avaliable (unbound) resources
+    int available[r]; //initially avaliable (unbound) resources
 
     cout<<"provide available resources: ";
 
-    for(int i=0;i<m;i++) {
+    for(int i=0;i<r;i++) {
         cin>>available[i];
     }
 
     //forming need matrix
-    int need[n][m]; //need = maximum resources required - pre-allocated resources
+    int need[p][r]; //need = maximum resources required - pre-allocated resources
 
-    for (int i=0;i<n;i++) {
-        for (int j=0;j<m;j++) {
+    for (int i=0;i<p;i++) {
+        for (int j=0;j<r;j++) {
             need[i][j] = max[i][j] - allocation[i][j];
         }
     }
 
-    int f[n]; //logic array
+    int f[p]; //logic array
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<p;i++) {
         f[i]=0;
     }
 
     int counter=0;
 
-    for (int k=0;k<n;k++) {
+    for (int k=0;k<p;k++) {
         
-        for (int i=0;i<n;i++) {
+        for (int i=0;i<p;i++) {
 
             if (f[i]==0) {
 
                 int flag=0;
                 
-                for (int j=0;j<m;j++) {
+                for (int j=0;j<r;j++) {
 
                     if (need[i][j] > available[j]) {
                         
                         flag = 1;
 
-                        break;
+                        break; //for 1 process
                     }
                 }
 
@@ -88,7 +88,7 @@ int main() {
                     safe_sequence[counter] = i;
                     counter++;
 
-                    for (int y=0;y<m;y++) {
+                    for (int y=0;y<r;y++) {
     
                         available[y] = available[y] + allocation[i][y];
                             
@@ -103,7 +103,7 @@ int main() {
     // To check for deadlock
     int checker=0;
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<p;i++) {
     
         if(f[i]!=1) {
             checker++;
@@ -114,9 +114,9 @@ int main() {
         cout<<"all processes will execute sequentially."<<endl;
 
         cout<<"possible safe sequence: ";
-        for(int i=0;i<n;i++) {
+        for(int i=0;i<p;i++) {
 
-            if(i==n-1) {
+            if(i==p-1) {
                 cout<<safe_sequence[i]+1;
             }
             else {

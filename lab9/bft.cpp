@@ -1,6 +1,4 @@
 #include<iostream>
-#include<bits/stdc++.h>
-#include<vector>
 using namespace std;
 
 int main() {
@@ -29,6 +27,7 @@ int main() {
     for(int i=0;i<p;i++) {
         cin>>process[i];
     }
+
     int* allocated_block_index = (int*)malloc(p*sizeof(int));
 
     //checker
@@ -64,7 +63,7 @@ int main() {
     cout<<"processes ";
     for(int i=0;i<p;i++) {
         
-        if(allocated_block_index[i]) {
+        if(allocated_block_index[i] != -1) {
             
             cout<<"["<<i+1<<"]"<<" ";
         }
@@ -72,7 +71,7 @@ int main() {
     cout<<"have been allocated to blocks ";
     for(int i=0;i<p;i++) {
 
-        if(allocated_block_index[i]) {
+        if(allocated_block_index[i] != -1) {
 
             cout<<"["<<allocated_block_index[i]+1<<"]"<<" ";
         }
@@ -84,7 +83,7 @@ int main() {
     cout<<"processes ";
     for(int i=0;i<p;i++) {
 
-        if(!allocated_block_index[i]) {
+        if(allocated_block_index[i] == -1) {
             
             cout<<"["<<i+1<<"]"<<" ";
         }

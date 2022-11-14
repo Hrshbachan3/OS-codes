@@ -3,31 +3,31 @@ using namespace std;
 
 int main() {
     
-    int n;
+    int b;
     cout<<"number of blocks: ";
-    cin>>n;
+    cin>>b;
     
-    int m;
+    int p;
     cout<<"number of processes: ";
-    cin>>m;
+    cin>>p;
 
-    int* block = (int*)malloc(n*sizeof(int));
+    int* block = (int*)malloc(b*sizeof(int));
     cout<<"provide size of blocks: ";
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<b;i++) {
         cin>>block[i];
     }
 
-    int* process = (int*)malloc(m*sizeof(int));
+    int* process = (int*)malloc(p*sizeof(int));
     cout<<"provide size of processes: ";
-    for(int i=0;i<m;i++) {
+    for(int i=0;i<p;i++) {
         cin>>process[i];
     }
 
     //for first fit, we will check the blocks and processes in a contiguous manner
 
-    int* unallocated = (int*)malloc(m*sizeof(int));
+    int* unallocated = (int*)malloc(p*sizeof(int));
 
-    for(int i=0;i<m;i++) {
+    for(int i=0;i<p;i++) {
 
         if(process[i]<=block[i]) {
 
@@ -42,7 +42,7 @@ int main() {
 
     cout<<"remaining memory: ";
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<b;i++) {
         cout<<block[i]<<" ";
     }
 
@@ -52,7 +52,7 @@ int main() {
 
     int counter=0;
 
-    for(int i=0;i<n;i++) {
+    for(int i=0;i<b;i++) {
 
         if(unallocated[i]!=0) {
             cout<<"process "<<i+1<<" which needed "<<process[i]<<" memory"<<endl;
